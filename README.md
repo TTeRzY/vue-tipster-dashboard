@@ -1,8 +1,8 @@
-# vue-dashboard
+# vue-tipster-dashboard
 
-![Alt text](https://github.com/TTeRzY/vue-dashboard/blob/master/src/assets/vue-dashboard3.png "Vue - Dashboard")
+![Alt text](https://github.com/TTeRzY/vue-dashboard/blob/master/src/assets/vue-tipster-dashboard.png "Vue - Dashboard")
 
-![Alt text](https://github.com/TTeRzY/vue-dashboard/blob/master/src/assets/vue-dashboard4.png "Vue - Dashboard")
+![Alt text](https://github.com/TTeRzY/vue-dashboard/blob/master/src/assets/vue-tipster-dashboard1.png "Vue - Dashboard")
 
 
 ## Build Setup
