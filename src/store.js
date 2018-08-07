@@ -12,13 +12,14 @@ export default new Vuex.Store({
     idToken: null,
     userId: null,
     user: null,
-    userEmail: null
+    userEmail: null,
+    userKey : null
   },
   mutations: {
     authUser(state, userData) {
       state.idToken = userData.token;
       state.userId = userData.userId;
-      state.userEmail = userData.email
+      state.userEmail = userData.email;
     },
     storeUser(state, user) {
       state.user = user
@@ -26,9 +27,41 @@ export default new Vuex.Store({
     clearAuthData(state) {
       state.idToken = null;
       state.userId = null
+    },
+    loadBets(state, mybets){
+      state.placedBets = mybets;
     }
   },
   actions: {
+    placebet({commit, state}, betsData){
+      if (!state.idToken) {
+        return
+      }
+      globalAxios.post('/bets.json' + '?auth=' + state.idToken, betsData)
+        .then(res => console.log(res))
+        .catch(error => console.log(error))
+    },
+    pendingBets({commit, state}, betData){
+      globalAxios.get('/bets.json'+ '?auth=' + state.idToken)
+        .then(res => {
+          let data = res.data;
+          let dataId = [];
+          for(let key in data){
+            if(betData.key === key){
+              globalAxios.put('https://vue-auth-e395c.firebaseio.com/bets/'+ betData.key + '.json?auth=' + state.idToken, betData.matchData)
+                .then(res => {
+                  console.log(res);
+                })
+                .catch(error => {
+                  console.log(error);
+                })
+            }
+          }
+
+
+        });
+
+    },
     setLogoutTimer({commit}, expirationTime) {
       setTimeout(() => {
         commit('clearAuthData')
@@ -90,11 +123,12 @@ export default new Vuex.Store({
           localStorage.setItem('token', res.data.idToken);
           localStorage.setItem('userId', res.data.localId);
           localStorage.setItem('expireIn', expirationDate);
-          console.log(res.data)
+          console.log('Res Data',res.data);
           commit('authUser', {
             email: res.data.email,
             token: res.data.idToken,
-            userId: res.data.localId
+            userId: res.data.localId,
+            userKey: res.data
           });
           dispatch('setLogoutTimer', res.data.expiresIn);
           router.replace('/dashboard')
@@ -136,6 +170,9 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    sendToken(state){
+      return state.idToken
+    },
     user(state) {
       return state.user
     },
@@ -144,3 +181,4 @@ export default new Vuex.Store({
     }
   }
 })
+

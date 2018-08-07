@@ -33,6 +33,12 @@
              <li tag="li" active-class="active">
                <a href="" @click.prevent="selectedComponent = 'appCharts'">Statistics</a>
              </li>
+             <li tag="li" active-class="active">
+               <a href="" @click.prevent="selectedComponent = 'appPlaceBet'">Place Bet</a>
+             </li>
+             <li tag="li" active-class="active">
+               <a href="" @click.prevent="selectedComponent = 'appPendingPicks'">Pending Picks</a>
+             </li>
            </ul>
 
          </nav>
@@ -50,8 +56,10 @@
 </template>
 
 <script>
-  import Home from './Home.vue';
+  import Home from './MyPicks.vue';
   import Charts from './Charts/Charts.vue';
+  import PlaceBet from './PlaceBet.vue';
+  import PendingPicks from './PendingPicks.vue';
   export default {
     data() {
       return {
@@ -63,7 +71,9 @@
     },
     components: {
       appHome: Home,
-      appCharts: Charts
+      appCharts: Charts,
+      appPlaceBet: PlaceBet,
+      appPendingPicks: PendingPicks
     },
     computed: {
       email () {
