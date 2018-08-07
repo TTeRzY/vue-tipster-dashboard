@@ -5,31 +5,34 @@ import store from '../src/store';
 
 let idToken = (store.state.idToken);
 let getResults = [];
-globalAxios.get('/bets.json'+ '?auth=' + idToken)
+
+(function() {
+  globalAxios.get('/bets.json' + '?auth=' + idToken)
     .then(res => {
       let pieData = res.data;
       let countGames = 0;
       let loses = 0;
       let wins = 0;
       let ties = 0;
-      for(let key in pieData){
-        if(pieData[key].matchResult){
+      for (let key in pieData) {
+        if (pieData[key].matchResult) {
           countGames++;
-          if(pieData[key].winLossResult < 0){
+          if (pieData[key].winLossResult < 0) {
             loses++;
           }
-          else if(pieData[key].winLossResult > 0){
+          else if (pieData[key].winLossResult > 0) {
             wins++;
           }
-          else{
+          else {
             ties++;
           }
         }
       }
-      getResults.push((wins / countGames)* 100);
-      getResults.push((ties / countGames)* 100);
-      getResults.push((loses / countGames)* 100) ;
+      getResults.push((wins / countGames) * 100);
+      getResults.push((ties / countGames) * 100);
+      getResults.push((loses / countGames) * 100);
     });
+})();
 
 let colors = [
   '#4dbfa2',

@@ -7,7 +7,9 @@ let idToken = store.state.idToken;
 let profitData = [];
 let betDates = [];
 
-const pieData=globalAxios.get('/bets.json'+ '?auth=' + idToken)
+
+(function(){
+  globalAxios.get('/bets.json'+ '?auth=' + idToken)
     .then(res => {
       let profitChartData = res.data;
       let profit = 0;
@@ -19,6 +21,7 @@ const pieData=globalAxios.get('/bets.json'+ '?auth=' + idToken)
         }
       }
     });
+})();
 
 let colors = [
   '#4dbfa2',
