@@ -71,7 +71,7 @@ export default new Vuex.Store({
       let setUserName = authData.firstName;
       localStorage.setItem('userName', setUserName);
 
-      axios.post('/signupNewUser?key=[YOUR_API_KEY]', {
+      axios.post('/signupNewUser?key=AIzaSyAjiWKp_fAJSEEnKTnEBthYPw_SXeaBtR8', {
         email: authData.email,
         password: authData.password,
         returnSecureToken: true
@@ -113,7 +113,7 @@ export default new Vuex.Store({
     login({commit, dispatch}, authData) {
       let setUserName = authData.getFirstName[0];
       localStorage.setItem('userName', setUserName);
-      axios.post('/verifyPassword?key=[YOUR_API_KEY]', {
+      axios.post('/verifyPassword?key=AIzaSyAjiWKp_fAJSEEnKTnEBthYPw_SXeaBtR8', {
         email: authData.email,
         password: authData.password,
         returnSecureToken: true

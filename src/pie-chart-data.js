@@ -6,7 +6,6 @@ import store from '../src/store';
 let idToken = (store.state.idToken);
 let getResults = [];
 
-(function() {
   globalAxios.get('/bets.json' + '?auth=' + idToken)
     .then(res => {
       let pieData = res.data;
@@ -32,7 +31,6 @@ let getResults = [];
       getResults.push((ties / countGames) * 100);
       getResults.push((loses / countGames) * 100);
     });
-})();
 
 let colors = [
   '#4dbfa2',
@@ -57,6 +55,6 @@ export const pieChart = {
     responsive: true,
     lineTension: 1,
   }
-}
+};
 
 export default pieChart;
